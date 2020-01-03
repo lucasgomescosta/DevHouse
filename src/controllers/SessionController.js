@@ -1,4 +1,3 @@
-import { Router } from "express";
 import * as Yup from "yup";
 
 // méotodos: index, show, update, store, destroy
