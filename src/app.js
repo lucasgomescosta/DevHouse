@@ -1,37 +1,38 @@
-import express from 'express';
-import routes from './routes';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import path from 'path';
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import path from "path";
+import routes from "./routes";
 
-class App{
-  constructor(){
+class App {
+  constructor() {
     this.server = express();
 
-    mongoose.connect('mongodb+srv://omnistack:omnistack@omnistack-gjnco.mongodb.net/semana09?retryWrites=true&w=majority',{
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    mongoose.connect(
+      "mongodb+srv://omnistack:omnistack@omnistack-gjnco.mongodb.net/semana09?retryWrites=true&w=majority",
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+      }
+    );
     this.middlewares();
     this.routes();
   }
 
-  middlewares(){
+  middlewares() {
     this.server.use(cors());
-    
+
     this.server.use(
-      '/files',
-      express.static(path.resolve(__dirname, '..', 'uploads' ))
+      "/files",
+      express.static(path.resolve(__dirname, "..", "uploads"))
     );
 
     this.server.use(express.json());
   }
 
-  routes(){
+  routes() {
     this.server.use(routes);
   }
-
 }
-
 
 export default new App().server;
